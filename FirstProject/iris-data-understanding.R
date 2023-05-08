@@ -1,6 +1,6 @@
 # Method 1 to retrieve data set.
-library(datasets)
-data("iris")
+#library(datasets)
+#data("iris")
 
 # Method 2 read from my github for flexibility.
 library(RCurl)
@@ -32,10 +32,28 @@ sum(is.na(my_iris))
 library(skimr)
 skim(my_iris)
 
-# Group data by Species then pergorm skim.
-grouped_data <- aggregate(
-  x = my_iris,
-  by = list(my_iris$Species),
-  FUN = order
-)
+# Group data by Species then perform skim.
+my_iris %>%
+  dplyr::group_by(Species) %>%
+  skim()
+
+
+# Quick data visualization
+
+# Panel Plot
+plot(my_iris) # R base plot function
+plot(my_iris, col = c('red')) # Coloring the chart with red color
+
+# Scatter Plot (R Base again)
+plot(x = my_iris$Sepal.Width, y = my_iris$Sepal.Length) 
+
+plot(x = my_iris$Sepal.Width, y = my_iris$Sepal.Length, 
+     xlab = 'Sepal Width', ylab = 'Sepal Length', 
+     main = 'Scatter plot of Width by Length', col = 'Red' ) 
+
+# Histogram 
+
+hist(my_iris$Sepal.Width, xlab = 'Sepal Width', col = 'DarkGreen',)
+
+
 
